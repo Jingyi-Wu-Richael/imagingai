@@ -1,4 +1,4 @@
-import { login, logout, getInfo } from '@/api/user'
+import { login, signup, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
@@ -12,6 +12,7 @@ const getDefaultState = () => {
 
 const state = getDefaultState()
 
+//payload 
 const mutations = {
   RESET_STATE: (state) => {
     Object.assign(state, getDefaultState())
@@ -33,6 +34,21 @@ const actions = {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
+        const { data } = response
+        commit('SET_TOKEN', data.token)
+        setToken(data.token)
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+
+  // user signup
+  signup({ commit }, userInfo1) {
+    const { username, password, repeated} = userInfo1
+    return new Promise((resolve, reject) => {
+      signup({ username: username.trim(), password: password, repeated: repeated }).then(response => {
         const { data } = response
         commit('SET_TOKEN', data.token)
         setToken(data.token)

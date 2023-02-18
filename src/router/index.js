@@ -38,6 +38,12 @@ export const constantRoutes = [
   },
 
   {
+    path: '/signup',
+    component: () => import('@/views/signup/index'),
+    hidden: true
+  },
+
+  {
     path: '/404',
     component: () => import('@/views/404'),
     hidden: true
@@ -56,11 +62,24 @@ export const constantRoutes = [
   },
 
   {
+    path: '/form',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Form',
+        component: () => import('@/views/form/index'),
+        meta: { title: 'Create Team', icon: 'form' }
+      }
+    ]
+  },
+
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
     name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    meta: { title: 'Team', icon: 'el-icon-s-help' },
     children: [
       {
         path: 'table',
@@ -78,25 +97,24 @@ export const constantRoutes = [
   },
 
   {
-    path: '/form',
+    path: '/project',
     component: Layout,
     children: [
       {
         path: 'index',
         name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        component: () => import('@/views/project/index'),
+        meta: { title: 'Create Project', icon: 'form' }
       }
     ]
   },
-
   {
     path: '/nested',
     component: Layout,
     redirect: '/nested/menu1',
     name: 'Nested',
     meta: {
-      title: 'Nested',
+      title: 'Project',
       icon: 'nested'
     },
     children: [
@@ -104,31 +122,31 @@ export const constantRoutes = [
         path: 'menu1',
         component: () => import('@/views/nested/menu1/index'), // Parent router-view
         name: 'Menu1',
-        meta: { title: 'Menu1' },
+        meta: { title: 'Project1' },
         children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
+          // {
+          //   path: 'menu1-1',
+          //   component: () => import('@/views/nested/menu1/menu1-1'),
+          //   name: 'Menu1-1',
+          //   meta: { title: 'Data1' }
+          // },
           {
             path: 'menu1-2',
             component: () => import('@/views/nested/menu1/menu1-2'),
             name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
+            meta: { title: 'Data1' },
             children: [
               {
                 path: 'menu1-2-1',
                 component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
                 name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
+                meta: { title: 'Input' }
               },
               {
                 path: 'menu1-2-2',
                 component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
                 name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
+                meta: { title: 'Output' }
               }
             ]
           },
@@ -136,7 +154,7 @@ export const constantRoutes = [
             path: 'menu1-3',
             component: () => import('@/views/nested/menu1/menu1-3'),
             name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
+            meta: { title: 'Data2' }
           }
         ]
       },
@@ -144,7 +162,7 @@ export const constantRoutes = [
         path: 'menu2',
         component: () => import('@/views/nested/menu2/index'),
         name: 'Menu2',
-        meta: { title: 'menu2' }
+        meta: { title: 'Project2' }
       }
     ]
   },
@@ -154,7 +172,7 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
+        path: 'https://gitlab.doc.ic.ac.uk/g227004217/webapplicationformedicalimagingai',
         meta: { title: 'External Link', icon: 'link' }
       }
     ]

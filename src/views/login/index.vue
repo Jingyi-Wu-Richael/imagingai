@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <h3 class="title">Medical Brain Imaging AI</h3>
       </div>
 
       <el-form-item prop="username">
@@ -35,17 +35,20 @@
           tabindex="2"
           auto-complete="on"
           @keyup.enter.native="handleLogin"
+          
         />
         <span class="show-pwd" @click="showPwd">
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
 
+      <!-- login button -->
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
+      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click = "handleSignup">Sign up</el-button>
 
       <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: any</span>
+        <span style="margin-right:20px;">username: any</span>
+        <!-- <span> password: any</span> -->
       </div>
 
     </el-form>
@@ -59,11 +62,12 @@ export default {
   name: 'Login',
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
-      } else {
-        callback()
-      }
+      // if (!validUsername(value)) {
+      //   callback(new Error('Please enter the correct user name'))
+      // } else {
+      //   callback()
+      // }
+      callback()
     }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
@@ -80,6 +84,8 @@ export default {
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        // username: [{ required: true, trigger: 'blur'}],
+        // password: [{ required: true, trigger: 'blur'}]
       },
       loading: false,
       passwordType: 'password',
@@ -120,6 +126,22 @@ export default {
           return false
         }
       })
+    },
+    handleSignup() {
+      this.$refs.loginForm.validate(valid => {
+        if (valid) {
+          this.loading = true
+          this.$store.dispatch('user/signup', this.signForm).then(() => {
+            this.$router.push({ path: this.redirect || '/' })
+            this.loading = false
+          }).catch(() => {
+            this.loading = false
+          })
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
     }
   }
 }
@@ -141,6 +163,7 @@ $cursor: #fff;
 
 /* reset element-ui css */
 .login-container {
+  // 文本框
   .el-input {
     display: inline-block;
     height: 47px;
@@ -149,7 +172,7 @@ $cursor: #fff;
     input {
       background: transparent;
       border: 0px;
-      -webkit-appearance: none;
+      appearance: none;
       border-radius: 0px;
       padding: 12px 5px 12px 15px;
       color: $light_gray;
@@ -162,7 +185,7 @@ $cursor: #fff;
       }
     }
   }
-
+  //文本框边框
   .el-form-item {
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(0, 0, 0, 0.1);
@@ -177,6 +200,7 @@ $bg:#2d3a4b;
 $dark_gray:#889aa4;
 $light_gray:#eee;
 
+// 登录页面全体
 .login-container {
   min-height: 100%;
   width: 100%;
@@ -192,6 +216,7 @@ $light_gray:#eee;
     overflow: hidden;
   }
 
+  //登录按钮下面那行话
   .tips {
     font-size: 14px;
     color: #fff;
@@ -215,6 +240,7 @@ $light_gray:#eee;
   .title-container {
     position: relative;
 
+    //文字
     .title {
       font-size: 26px;
       color: $light_gray;

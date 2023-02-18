@@ -8,6 +8,14 @@ export function login(data) {
   })
 }
 
+export function signup(data) {
+  return request({
+    url: '/vue-admin-template/user/signup',
+    method: 'post',
+    data
+  })
+}
+
 export function getInfo(token) {
   return request({
     url: '/vue-admin-template/user/info',
