@@ -34,10 +34,10 @@ const actions = {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
-        const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
+        commit('SET_TOKEN', response.token)
+        setToken(response.token)
         resolve()
+
       }).catch(error => {
         reject(error)
       })
@@ -49,9 +49,9 @@ const actions = {
     const { username, password, repeated} = userInfo1
     return new Promise((resolve, reject) => {
       signup({ username: username.trim(), password: password, repeated: repeated }).then(response => {
-        const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
+        // const { data } = response
+        // commit('SET_TOKEN', data.token)
+        // setToken(data.token)
         resolve()
       }).catch(error => {
         reject(error)
@@ -62,35 +62,39 @@ const actions = {
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
-      getInfo(state.token).then(response => {
-        const { data } = response
+      resolve({username:'1',password:'2'})
+      // getInfo(state.token).then(response => {
+      //   const { data } = response
 
-        if (!data) {
-          return reject('Verification failed, please Login again.')
-        }
+      //   if (!data) {
+      //     return reject('Verification failed, please Login again.')
+      //   }
 
-        const { name, avatar } = data
+      //   const { name, avatar } = data
 
-        commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
-        resolve(data)
-      }).catch(error => {
-        reject(error)
-      })
+      //   commit('SET_NAME', name)
+      //   commit('SET_AVATAR', avatar)
+      //   resolve(data)
+      // }).catch(error => {
+      //   reject(error)
+      // })
     })
   },
 
   // user logout
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
-      logout(state.token).then(() => {
-        removeToken() // must remove  token  first
-        resetRouter()
-        commit('RESET_STATE')
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
+      removeToken() 
+      resetRouter()
+      resolve()
+      // logout(state.token).then(() => {
+      //   removeToken() // must remove  token  first
+      //   resetRouter()
+      //   commit('RESET_STATE')
+      //   resolve()
+      // }).catch(error => {
+      //   reject(error)
+      // })
     })
   },
 

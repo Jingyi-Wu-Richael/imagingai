@@ -1,66 +1,56 @@
 <template>
-  <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
-
-      <div class="title-container">
-        <h3 class="title">Medical Brain Imaging AI</h3>
+  <div class="login">
+    <div class="header">
+      <h3 class="title">Medical Brain Imaging AI</h3>
+      <div class="logo">
+        <img src="@/assets/login/u4.jpg" alt="">
       </div>
+    </div>
+    <div class="login-container">
 
-      <el-form-item prop="username">
-        <span class="svg-container">
-          <svg-icon icon-class="user" />
-        </span>
-        <el-input
-          ref="username"
-          v-model="loginForm.username"
-          placeholder="Username"
-          name="username"
-          type="text"
-          tabindex="1"
-          auto-complete="on"
-        />
-      </el-form-item>
+      <div class="form-box">
+        <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
-      <el-form-item prop="password">
-        <span class="svg-container">
-          <svg-icon icon-class="password" />
-        </span>
-        <el-input
-          :key="passwordType"
-          ref="password"
-          v-model="loginForm.password"
-          :type="passwordType"
-          placeholder="Password"
-          name="password"
-          tabindex="2"
-          auto-complete="on"
-          @keyup.enter.native="handleLogin"
-          
-        />
-        <span class="show-pwd" @click="showPwd">
-          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
-        </span>
-      </el-form-item>
+          <div class="title-container">
+            <h3>User Login</h3>
+          </div>
 
-      <!-- login button -->
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click = "handleSignup">Sign up</el-button>
+          <el-form-item prop="username">
+            <span class="svg-container">
+              <svg-icon icon-class="user" />
+            </span>
+            <el-input ref="username" v-model="loginForm.username" placeholder="Account" name="username" type="text" tabindex="1" auto-complete="on" />
+          </el-form-item>
 
-      <div class="tips">
-        <span style="margin-right:20px;">username: any</span>
-        <!-- <span> password: any</span> -->
+          <el-form-item prop="password">
+            <span class="svg-container">
+              <svg-icon icon-class="password" />
+            </span>
+            <el-input :key="passwordType" ref="password" v-model="loginForm.password" :type="passwordType" placeholder="Password" name="password" tabindex="2" auto-complete="on" @keyup.enter.native="handleLogin" />
+            <span class="show-pwd" @click="showPwd">
+              <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+            </span>
+          </el-form-item>
+
+          <!-- login button -->
+          <div>
+            <el-button :loading="loading" size="medium" type="primary" class="btn-form" style=" margin-bottom:1rem;" @click.native.prevent="handleLogin">Login</el-button>
+          </div>
+          <div>
+            <el-button :loading="loading" size="medium" type="primary" class="btn-form" @click="handleSignup">Sign up</el-button>
+          </div>
+
+        </el-form>
       </div>
-
-    </el-form>
+    </div>
   </div>
 </template>
 
 <script>
 import { validUsername } from '@/utils/validate'
-
 export default {
   name: 'Login',
-  data() {
+  data () {
     const validateUsername = (rule, value, callback) => {
       // if (!validUsername(value)) {
       //   callback(new Error('Please enter the correct user name'))
@@ -70,7 +60,7 @@ export default {
       callback()
     }
     const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
+      if (value.length < 3) {
         callback(new Error('The password can not be less than 6 digits'))
       } else {
         callback()
@@ -78,14 +68,12 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        username: '',
+        password: ''
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
-        // username: [{ required: true, trigger: 'blur'}],
-        // password: [{ required: true, trigger: 'blur'}]
       },
       loading: false,
       passwordType: 'password',
@@ -94,14 +82,14 @@ export default {
   },
   watch: {
     $route: {
-      handler: function(route) {
+      handler: function (route) {
         this.redirect = route.query && route.query.redirect
       },
       immediate: true
     }
   },
   methods: {
-    showPwd() {
+    showPwd () {
       if (this.passwordType === 'password') {
         this.passwordType = ''
       } else {
@@ -111,37 +99,41 @@ export default {
         this.$refs.password.focus()
       })
     },
-    handleLogin() {
+    handleLogin () {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          this.$store.dispatch('user/login', this.loginForm).then(() => {
-            this.$router.push({ path: this.redirect || '/' })
-            this.loading = false
-          }).catch(() => {
-            this.loading = false
-          })
+          this.$store.dispatch('user/login', this.loginForm)
+            .then(() => {
+              this.$router.push({ path: this.redirect || '/' })
+              this.loading = false
+            }).catch(() => {
+              this.loading = false
+            })
         } else {
           console.log('error submit!!')
           return false
         }
       })
     },
-    handleSignup() {
-      this.$refs.loginForm.validate(valid => {
-        if (valid) {
-          this.loading = true
-          this.$store.dispatch('user/signup', this.signForm).then(() => {
-            this.$router.push({ path: this.redirect || '/' })
-            this.loading = false
-          }).catch(() => {
-            this.loading = false
-          })
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
+    handleSignup () {
+      console.log('register');
+      this.$router.push({ path: '/signup' })
+
+      // this.$refs.loginForm.validate(valid => {
+      //   if (valid) {
+      //     this.loading = true
+      //     this.$store.dispatch('user/signup', this.signForm).then(() => {
+      //       this.$router.push({ path: this.redirect || '/' })
+      //       this.loading = false
+      //     }).catch(() => {
+      //       this.loading = false
+      //     })
+      //   } else {
+      //     console.log('error submit!!')
+      //     return false
+      //   }
+      // })
     }
   }
 }
@@ -151,8 +143,8 @@ export default {
 /* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
-$bg:#283443;
-$light_gray:#fff;
+$bg: #fff;
+$light_gray: #333;
 $cursor: #fff;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
@@ -196,24 +188,49 @@ $cursor: #fff;
 </style>
 
 <style lang="scss" scoped>
-$bg:#2d3a4b;
-$dark_gray:#889aa4;
-$light_gray:#eee;
+$bg: #fff;
+$dark_gray: #889aa4;
+$light_gray: #333;
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+}
+.logo {
+  img {
+    width: 203px;
+    height: 70px;
+  }
+}
+.login {
+  height: 100vh;
+  overflow: hidden;
+}
 // 登录页面全体
 .login-container {
-  min-height: 100%;
   width: 100%;
+  height: 100%;
   background-color: $bg;
   overflow: hidden;
-
+  background: url(../../assets/login/u0_state0.jpg) no-repeat center
+    center/cover;
+  .form-box {
+    display: flex;
+    justify-content: flex-end;
+    width: 80%;
+    margin: 0 auto;
+    padding: 4rem 0;
+  }
   .login-form {
     position: relative;
-    width: 520px;
-    max-width: 100%;
-    padding: 160px 35px 0;
-    margin: 0 auto;
+    width: 30%;
     overflow: hidden;
+    background: #fff;
+    padding: 2rem;
+    box-shadow: 0 0 0 0.2rem rgba(229, 227, 227, 0.5);
   }
 
   //登录按钮下面那行话
@@ -258,6 +275,19 @@ $light_gray:#eee;
     color: $dark_gray;
     cursor: pointer;
     user-select: none;
+  }
+}
+.login >>> .el-button + .el-button {
+  margin: 0;
+}
+.btn-form {
+  display: block;
+  width: 100%;
+  line-height: 2;
+  background: rgba(215, 215, 215, 1);
+  border: none;
+  &:hover {
+    background: rgb(87, 87, 87);
   }
 }
 </style>

@@ -1,101 +1,94 @@
 <template>
   <div class="page-register">
-    <el-form 
-    ref="signForm" 
-    :model="signForm" 
-    :rules="signRules" 
-    class="sign-form" 
-    auto-complete="on" 
-    label-position="left">
+    <el-form ref="signForm" :model="signForm" :rules="rules" class="sign-form" auto-complete="on" label-position="left">
 
+      <div class="logo">
+        <img src="@/assets/login/u4.jpg" alt="">
+      </div>
       <div class="titlel-container">
-        <h3 class="titlel">Sign up</h3>
+        <h3 class="titlel" style="text-align: center;">Welcome</h3>
       </div>
 
-      <el-form-item label="用户名" prop="username">
-          <el-input v-model="signForm.username" />
+      <el-form-item prop="username">
+        <span class="svg-container">
+          <svg-icon icon-class="user" />
+        </span>
+        <el-input v-model="signForm.username" placeholder="account" />
       </el-form-item>
-      <el-form-item label="密码" prop="password">
-          <el-input v-model="signForm.password" type="password" />
-      </el-form-item>
-      <el-form-item label="确认密码" prop="repeated">
-          <el-input v-model="signForm.repeated" type="password" />
-      </el-form-item>
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click = "handleSignup">Sign up</el-button>
 
+      <el-form-item prop="password">
+        <span class="svg-container">
+          <svg-icon icon-class="password" />
+        </span>
+        <el-input v-model="signForm.password" type="password" placeholder="password" />
+      </el-form-item>
+
+      <el-form-item prop="repeated">
+        <span class="svg-container">
+          <svg-icon icon-class="password" />
+        </span>
+        <el-input v-model="signForm.repeated" type="password" placeholder="Repeat the password" />
+      </el-form-item>
+
+      <el-button :loading="loading" type="primary" class="btn-form" @click="handleSignup">Activate the new account</el-button>
+      <div class="goHome">
+        <router-link to="/">Home</router-link>
+      </div>
     </el-form>
+
   </div>
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
 
 export default {
-  // name: 'Login',
-  data() {
+  data () {
+
+    var validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('Please input a password'));
+      } else {
+        if (this.signForm.password !== '') {
+          this.$refs.signForm.validateField('repeated');
+        }
+        callback();
+      }
+    };
+    var validateChePwd = (rule, value, callback) => {
+      console.log(value);
+      if (value === '') {
+        callback(new Error('Please enter the password again'));
+      } else if (value !== this.signForm.password) {
+        callback(new Error('The two passwords are inconsistent!'));
+      } else {
+        callback();
+      }
+    };
     return {
-      step: 2,
-      active: 0,
-      statusMsg: '',
-      error: '',
-      ruleForm: {
+      loading: false,
+      signForm: {
         username: '',
         password: '',
         repeated: '',
       },
       rules: {
-        username: [
-          { required: true, type: 'string', message: '请输入用户名', trigger: 'blur' }
-        ],
-        password: [
-          { required: true, message: '请输入密码', trigger: 'blur' }
-        ],
-        repeated: [
-          { required: true, message: '请再次输入密码', trigger: 'blur' },
-        ]
-      }, 
-    },{
-      validator: (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请再次输入密码'))
-        } else if (value !== this.signForm.password) {
-          callback(new Error('两次输入密码不一致!'))
-        } else {
-          callback()
-        }
+        username: [{ required: true, type: 'string', trigger: 'blur' }],
+        password: [{ required: true, trigger: 'blur', validator: validatePass }],
+        repeated: [{ required: true, trigger: 'blur', validator: validateChePwd }]
       },
     }
   },
   watch: {
     $route: {
-      handler: function(route) {
+      handler: function (route) {
         this.redirect = route.query && route.query.redirect
       },
       immediate: true
     }
   },
   methods: {
-    showPwd() {
-      if (this.passwordType === 'password') {
-        this.passwordType = ''
-      } else {
-        this.passwordType = 'password'
-      }
-      this.$nextTick(() => {
-        this.$refs.password.focus()
-      })
-    },
-    signup: function() {
-      this.$refs['signForm'].validate((valid) => {
-        if (valid) {
-          setTimeout(
-            this.$router.push('/login'), 2000
-          )
-        }
-      })
-    },
-    handleSignup() {
-      this.$refs.loginForm.validate(valid => {
+    handleSignup () {
+      this.$refs.signForm.validate(valid => {
         if (valid) {
           this.loading = true
           this.$store.dispatch('user/signup', this.signForm).then(() => {
@@ -115,10 +108,9 @@ export default {
 </script>
 
 <style lang="scss">
-
-$bg:#283443;
-$light_gray:#fff;
-$cursor: #fff;
+$bg: #fff;
+$light_gray: #333;
+$cursor: #333;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
   .page-register .el-input input {
@@ -160,23 +152,33 @@ $cursor: #fff;
 </style>
 
 <style lang="scss" scoped>
-$bg:#2d3a4b;
-$dark_gray:#889aa4;
-$light_gray:#eee;
+$bg: #fff;
+$dark_gray: #889aa4;
+$light_gray: #eee;
 
 .page-register {
   min-height: 100%;
   width: 100%;
   background-color: $bg;
   overflow: hidden;
-
+  position: relative;
+  .logo {
+    text-align: center;
+    img {
+      width: 50%;
+    }
+  }
   .sign-form {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 520px;
     max-width: 100%;
-    padding: 160px 35px 0;
+    padding: 1rem 1.5rem;
     margin: 0 auto;
-    overflow: hidden;
+    box-shadow: 0px 0px 10px rgb(0 0 0 / 35%);
+    border-radius: 10px;
   }
 
   .svg-container {
@@ -207,6 +209,24 @@ $light_gray:#eee;
     color: $dark_gray;
     cursor: pointer;
     user-select: none;
+  }
+}
+.goHome {
+  position: absolute;
+  top: 0;
+  right: -30%;
+  color: #000;
+  background: #07f1ed3e;
+  padding: 0.5rem 1rem;
+}
+.btn-form {
+  display: block;
+  width: 100%;
+  line-height: 2;
+  background: rgba(215, 215, 215, 1);
+  border: none;
+  &:hover {
+    background: rgb(87, 87, 87);
   }
 }
 </style>
