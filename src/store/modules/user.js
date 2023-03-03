@@ -34,7 +34,12 @@ const actions = {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
+        if(response.msg != 'Login success!'){
+          return reject(response.msg)
+        }
+        console.log(response);
         commit('SET_TOKEN', response.token)
+        commit('SET_NAME', username)
         setToken(response.token)
         resolve()
 

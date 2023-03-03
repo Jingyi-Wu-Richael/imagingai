@@ -61,18 +61,9 @@ export const constantRoutes = [
     }]
   },
 
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Create Team', icon: 'form' }
-      }
-    ]
-  },
+   
+
+   
 
   {
     path: '/example',
@@ -82,34 +73,27 @@ export const constantRoutes = [
     meta: { title: 'Team', icon: 'el-icon-s-help' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        path: 'createTeam',
+        name: 'createTeam',
+        component: () => import('@/views/example/createTeam'),
+        meta: { title: 'Create Team', icon: 'form' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
+        path: 'joinTeam',
+        name: 'Join',
+        component: () => import('@/views/example/joinTeam'),
+        meta: { title: 'Join team', icon: 'table' }
+      },
+      {
+        path: 'myTeam',
+        name: 'Table',
+        component: () => import('@/views/example/myTeam'),
+        meta: { title: 'My Team', icon: 'table' }
+      },
     ]
   },
-
   {
     path: '/project',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/project/index'),
-        meta: { title: 'Create Project', icon: 'form' }
-      }
-    ]
-  },
-  {
-    path: '/nested',
     component: Layout,
     redirect: '/nested/menu1',
     name: 'Nested',
@@ -119,53 +103,53 @@ export const constantRoutes = [
     },
     children: [
       {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Project1' },
-        children: [
-          // {
-          //   path: 'menu1-1',
-          //   component: () => import('@/views/nested/menu1/menu1-1'),
-          //   name: 'Menu1-1',
-          //   meta: { title: 'Data1' }
-          // },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Data1' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Input' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Output' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Data2' }
-          }
-        ]
+        path: 'createProject',
+        component: () => import('@/views/project/createProject'), // Parent router-view
+        name: 'createProject',
+        meta: { title: 'Create Project', icon: 'form' }
       },
       {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        name: 'Menu2',
-        meta: { title: 'Project2' }
-      }
+        path: 'myProject',
+        component: () => import('@/views/project/myProject'), // Parent router-view
+        name: 'myProject',
+        meta: { title: 'My Project', icon: 'form' }
+      },
     ]
   },
+  {
+    path: '/database',
+    component: Layout,
+    redirect: '/database/processing',
+    name: 'Database',
+    meta: { title: 'Database', icon: 'el-icon-s-data' },
+    children: [
+      {
+        path: 'processing',
+        name: 'Processing',
+        component: () => import('@/views/database/processing/index'),
+        meta: { title: 'Processing', icon: 'el-icon-s-promotion' }
+      },
+      {
+        path: 'result',
+        name: 'result',
+        component: () => import('@/views/database/result/index'),
+        meta: { title: 'Result', icon: 'table' }
+      },
+    ]
+  },
+  // {
+  //   path: '/project',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'create project',
+  //       component: () => import('@/views/project/index'),
+  //       meta: { title: 'Create Project', icon: 'form' }
+  //     }
+  //   ]
+  // },
+ 
 
   {
     path: 'external-link',

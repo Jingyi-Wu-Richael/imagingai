@@ -1,84 +1,200 @@
 <template>
-  <div class="login">
-    <div class="header">
-      <h3 class="title">Medical Brain Imaging AI</h3>
-      <div class="logo">
-        <img src="@/assets/login/u4.jpg" alt="">
-      </div>
-    </div>
-    <div class="login-container">
+  <div class="forms">
+    <div class="relative min-h-screen flex">
+      <div class="
+                    flex flex-col
+                    sm:flex-row
+                    items-center
+                    md:items-start
+                    sm:justify-center
+                    md:justify-start
+                    flex-auto
+                    min-w-0
+                    bg-white
+                ">
+        <div class="
+                        sm:w-1/2
+                        xl:w-3/5
+                        h-full
+                        hidden
+                        md:flex
+                        flex-auto
+                        items-center
+                        justify-center
+                        p-10
+                        overflow-hidden
+                        bg-purple-900
+                        text-white
+                        bg-no-repeat bg-cover
+                        relative
+                        loginBg
+                    " >
+          <div class="
+                            shadow
+                            absolute
+                            bg-gradient-to-b
+                            from-indigo-600
+                            to-blue-500
+                            opacity-75
+                            inset-0
+                            z-0
+                        "></div>
+          <div class="w-full max-w-md z-10" style="min-height: 340px;">
+            <div class="sm:text-2xl xl:text-3xl font-bold leading-tight mb-6">{{ title }}</div>
+            <div class="sm:text-sm xl:text-md text-gray-200 font-normal">
+            </div>
+            <div class="welcome"></div>
 
-      <div class="form-box">
-        <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
-
-          <div class="title-container">
-            <h3>User Login</h3>
           </div>
+          <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+        <div class="
+                        md:flex md:items-center md:justify-center
+                        w-full
+                        sm:w-auto
+                        md:h-full
+                        w-2/5
+                        xl:w-2/5
+                        p-8
+                        md:p-10
+                        lg:p-14
+                        sm:rounded-lg
+                        md:rounded-none
+                        bg-white
+                    ">
+          <div class="max-w-md w-full mx-auto space-y-8">
+            <div class="text-center">
+              <h2 class="mt-6 text-3xl font-bold text-gray-900">
+                <img src="@/assets/login/u4.jpg" alt="">
+              </h2>
+              <p class="mt-2 text-sm text-gray-500"></p>
+            </div>
+            <div class="flex items-center justify-center space-x-2">
+              <span class="h-px w-16 bg-gray-200"></span>
+              <span class="text-gray-300 font-normal">Log in using your account</span>
+              <span class="h-px w-16 bg-gray-200"></span>
+            </div>
+            <section class="mt-8 space-y-6">
+              <input type="hidden" name="remember" value="true" />
+              <div class="relative">
+                <label class="ml-3 text-sm font-bold text-gray-700 tracking-wide">Account</label>
+                <input v-model="loginForm.username" class="
+                                        w-full
+                                        text-base
+                                        px-4
+                                        py-2
+                                        border-b border-gray-300
+                                        focus:outline-none
+                                        rounded-2xl
+                                        focus:border-indigo-500
+                                    " type="" placeholder="Enter your username" />
+              </div>
+              <div class="mt-8 content-center">
+                <label class="ml-3 text-sm font-bold text-gray-700 tracking-wide">Password</label>
+                <input v-model="loginForm.password" class="
+                                        w-full
+                                        content-center
+                                        text-base
+                                        px-4
+                                        py-2
+                                        border-b
+                                        rounded-2xl
+                                        border-gray-300
+                                        focus:outline-none focus:border-indigo-500
+                                    " type="" placeholder="Enter your password" />
+              </div>
 
-          <el-form-item prop="username">
-            <span class="svg-container">
-              <svg-icon icon-class="user" />
-            </span>
-            <el-input ref="username" v-model="loginForm.username" placeholder="Account" name="username" type="text" tabindex="1" auto-complete="on" />
-          </el-form-item>
-
-          <el-form-item prop="password">
-            <span class="svg-container">
-              <svg-icon icon-class="password" />
-            </span>
-            <el-input :key="passwordType" ref="password" v-model="loginForm.password" :type="passwordType" placeholder="Password" name="password" tabindex="2" auto-complete="on" @keyup.enter.native="handleLogin" />
-            <span class="show-pwd" @click="showPwd">
-              <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
-            </span>
-          </el-form-item>
-
-          <!-- login button -->
-          <div>
-            <el-button :loading="loading" size="medium" type="primary" class="btn-form" style=" margin-bottom:1rem;" @click.native.prevent="handleLogin">Login</el-button>
+              <div>
+                <button @click="handleLogin" type="submit" class="
+                                        w-full
+                                        flex
+                                        justify-center
+                                        bg-gradient-to-r
+                                        from-gray-600
+                                        to-gray-500
+                                        hover:bg-gradient-to-l
+                                        hover:from-gray-600
+                                        hover:to-gray-500
+                                        text-gray-100
+                                        p-4
+                                        rounded-full
+                                        tracking-wide
+                                        font-semibold
+                                        shadow-lg
+                                        cursor-pointer
+                                        transition
+                                        ease-in
+                                        duration-500
+                                    ">Login</button>
+              </div>
+              <p class="
+                                    items-center
+                                    justify-center
+                                    mt-10
+                                    text-center text-md text-gray-500
+                                ">
+                <span>Don't have an account yet? </span>
+                <span @click="handleSignup" class="
+                                        text-indigo-400
+                                        hover:text-blue-500
+                                        no-underline
+                                        hover:underline
+                                        cursor-pointer
+                                        transition
+                                        ease-in
+                                        duration-300
+                                    ">Register Now</span>
+              </p>
+            </section>
           </div>
-          <div>
-            <el-button :loading="loading" size="medium" type="primary" class="btn-form" @click="handleSignup">Sign up</el-button>
-          </div>
-
-        </el-form>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
+
+import Typed from 'typed.js';
 export default {
   name: 'Login',
   data () {
-    const validateUsername = (rule, value, callback) => {
-      // if (!validUsername(value)) {
-      //   callback(new Error('Please enter the correct user name'))
-      // } else {
-      //   callback()
-      // }
-      callback()
-    }
-    const validatePassword = (rule, value, callback) => {
-      if (value.length < 3) {
-        callback(new Error('The password can not be less than 6 digits'))
-      } else {
-        callback()
-      }
-    }
     return {
       loginForm: {
         username: '',
         password: ''
       },
-      loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
-      },
       loading: false,
       passwordType: 'password',
-      redirect: undefined
+      redirect: undefined,
+      title: "Automatic Brain Tumour Segmentation deploying Gibbs ResUnet",
+      //title_sub: "bullet point",
+      strings: [
+        "<div>·manage your own project</div> <div>·work as a team</div> <div>·real time training your own model</div> <div>·real time testing using your chosen model</div> <div>·3d virtualise your MRI images</div>",
+      ]
     }
+  },
+  mounted () {
+    const options = {
+      strings: this.strings,
+      smartBackspace: true,
+      typeSpeed: 50, // 打印速度
+      startDelay: 300, // 开始之前的延迟300毫秒
+      loop: false, // 是否循环
+    };
+
+    const typed = new Typed('.welcome', options);
   },
   watch: {
     $route: {
@@ -89,205 +205,62 @@ export default {
     }
   },
   methods: {
-    showPwd () {
-      if (this.passwordType === 'password') {
-        this.passwordType = ''
-      } else {
-        this.passwordType = 'password'
-      }
-      this.$nextTick(() => {
-        this.$refs.password.focus()
-      })
-    },
     handleLogin () {
-      this.$refs.loginForm.validate(valid => {
-        if (valid) {
-          this.loading = true
-          this.$store.dispatch('user/login', this.loginForm)
-            .then(() => {
-              this.$router.push({ path: this.redirect || '/' })
-              this.loading = false
-            }).catch(() => {
-              this.loading = false
-            })
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
+      const { username, password } = this.loginForm
+      if (username == "") {
+        this.$notify({
+          title: 'warning',
+          message: 'Account name is required',
+          type: 'warning'
+        });
+        return
+      }
+
+      if (password == "") {
+        this.$notify({
+          title: 'warning',
+          message: 'Password is required',
+          type: 'warning'
+        });
+        return
+      }
+      this.loading = true
+      this.$store.dispatch('user/login', this.loginForm)
+        .then(() => {
+          this.$router.push({ path: this.redirect || '/' })
+          this.loading = false
+        }).catch((res) => {
+          this.$message({
+            type: 'error',
+            message: res
+          })
+          this.loading = false
+        })
     },
     handleSignup () {
       console.log('register');
       this.$router.push({ path: '/signup' })
-
-      // this.$refs.loginForm.validate(valid => {
-      //   if (valid) {
-      //     this.loading = true
-      //     this.$store.dispatch('user/signup', this.signForm).then(() => {
-      //       this.$router.push({ path: this.redirect || '/' })
-      //       this.loading = false
-      //     }).catch(() => {
-      //       this.loading = false
-      //     })
-      //   } else {
-      //     console.log('error submit!!')
-      //     return false
-      //   }
-      // })
     }
   }
 }
 </script>
-
-<style lang="scss">
-/* 修复input 背景不协调 和光标变色 */
-/* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
-
-$bg: #fff;
-$light_gray: #333;
-$cursor: #fff;
-
-@supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
-  .login-container .el-input input {
-    color: $cursor;
-  }
-}
-
-/* reset element-ui css */
-.login-container {
-  // 文本框
-  .el-input {
-    display: inline-block;
-    height: 47px;
-    width: 85%;
-
-    input {
-      background: transparent;
-      border: 0px;
-      appearance: none;
-      border-radius: 0px;
-      padding: 12px 5px 12px 15px;
-      color: $light_gray;
-      height: 47px;
-      caret-color: $cursor;
-
-      &:-webkit-autofill {
-        box-shadow: 0 0 0px 1000px $bg inset !important;
-        -webkit-text-fill-color: $cursor !important;
-      }
-    }
-  }
-  //文本框边框
-  .el-form-item {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    color: #454545;
-  }
-}
-</style>
-
+<style src="../../assets/css/tailwind.min.css" scoped></style>
+<style src="../../assets/css/style.css" scoped></style>
 <style lang="scss" scoped>
-$bg: #fff;
-$dark_gray: #889aa4;
-$light_gray: #333;
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 80%;
-  margin: 0 auto;
-}
-.logo {
-  img {
-    width: 203px;
-    height: 70px;
-  }
-}
-.login {
-  height: 100vh;
-  overflow: hidden;
-}
-// 登录页面全体
-.login-container {
-  width: 100%;
-  height: 100%;
-  background-color: $bg;
-  overflow: hidden;
-  background: url(../../assets/login/u0_state0.jpg) no-repeat center
-    center/cover;
-  .form-box {
-    display: flex;
-    justify-content: flex-end;
-    width: 80%;
-    margin: 0 auto;
-    padding: 4rem 0;
-  }
-  .login-form {
-    position: relative;
-    width: 30%;
-    overflow: hidden;
-    background: #fff;
-    padding: 2rem;
-    box-shadow: 0 0 0 0.2rem rgba(229, 227, 227, 0.5);
-  }
-
-  //登录按钮下面那行话
-  .tips {
-    font-size: 14px;
-    color: #fff;
-    margin-bottom: 10px;
-
-    span {
-      &:first-of-type {
-        margin-right: 16px;
-      }
-    }
-  }
-
-  .svg-container {
-    padding: 6px 5px 6px 15px;
-    color: $dark_gray;
-    vertical-align: middle;
-    width: 30px;
-    display: inline-block;
-  }
-
-  .title-container {
-    position: relative;
-
-    //文字
-    .title {
-      font-size: 26px;
-      color: $light_gray;
-      margin: 0px auto 40px auto;
-      text-align: center;
-      font-weight: bold;
-    }
-  }
-
-  .show-pwd {
-    position: absolute;
-    right: 10px;
-    top: 7px;
-    font-size: 16px;
-    color: $dark_gray;
-    cursor: pointer;
-    user-select: none;
-  }
-}
-.login >>> .el-button + .el-button {
-  margin: 0;
-}
-.btn-form {
-  display: block;
-  width: 100%;
+.welcome {
+  // 字体大小
+  font-size: 20px;
+  // 行高
   line-height: 2;
-  background: rgba(215, 215, 215, 1);
-  border: none;
-  &:hover {
-    background: rgb(87, 87, 87);
-  }
+}
+.loginBg {
+  // 背景图片
+  background-image: url(../../assets/login/3.jpeg);
+}
+.shadow{
+  // 渐变修改
+  background: linear-gradient(to left,rgb(34, 46, 80),rgb(49, 43, 83));
+  
 }
 </style>
+
