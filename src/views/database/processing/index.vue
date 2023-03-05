@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard-container">
+  <div class="dashboard-container" v-loading="uploadFileLoading">
     <div class="processing">
       <h3>Please Upload your MRI data (nii file) and push the "Start Processing" buttion to start data processing.</h3>
       <div class="pro-box">
@@ -40,6 +40,7 @@ export default {
   name: 'Processing',
   data () {
     return {
+      uploadFileLoading: false,
       processingForm: {
         projectID: "",
         dataFileID: "",
@@ -82,6 +83,7 @@ export default {
       formData.append('token', this.user.token)
       formData.append('image', photo)
       // 响应结果
+      this.uploadFileLoading = true
       uploadFile(formData)
         .then(res => {
           this.$message({
@@ -89,15 +91,19 @@ export default {
             message: 'Success'
           })
 
-          let url = res.image.replace('http://127.0.0.1:8000', process.env.VUE_APP_BASE_API)
+          // 本地环境
+          // 线上环境
+          let url = res.image.indexOf('http://localhost:8000/') != -1 ? res.image.replace('http://localhost:8000/', process.env.VUE_APP_BASE_API) : res.image.replace('http://127.0.0.1:8000', process.env.VUE_APP_BASE_API)
+          // let url = res.image.replace('http://127.0.0.1:8000', "http://file-imgai.zuimeng6.cn")
           console.log(url);
-          // url = "http://localhost:9528/django_api/MedImgAI/SaveImage_temp/mni152(1).nii.gz"
           const nv = new Niivue()
           nv.attachTo('gl')
           this.volumeList.push({ url, urlImgData: "nifti.img" })
           nv.loadVolumes(this.volumeList)
+          this.uploadFileLoading = false
         })
         .catch(err => {
+          this.uploadFileLoading = false
           console.log(err);
         })
     },

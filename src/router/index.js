@@ -135,6 +135,12 @@ export const constantRoutes = [
         component: () => import('@/views/database/result/index'),
         meta: { title: 'Result', icon: 'table' }
       },
+      {
+        path: 'myDatabase',
+        name: 'myDatabase',
+        component: () => import('@/views/database/myDatabase'),
+        meta: { title: 'My Database', icon: 'table' }
+      },
     ]
   },
   // {

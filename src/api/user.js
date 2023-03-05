@@ -139,6 +139,15 @@ export function showProject(data) {
 }
 
 
+export function showDatabase(data) {
+  return request({
+    url: "/database/show/",
+    method: 'post',
+    data
+  })
+}
+
+
 
 
 
