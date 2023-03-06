@@ -88,7 +88,7 @@ export default {
         teamSearch(this.search).then(response => {
           console.log(response);
         if (isArray(response) && response.length < 1) {
-          this.$message({ type: 'warning', message: 'Team details bu' })
+          // this.$message({ type: 'warning', message: 'Team details bu' })
         }
         this.list = [response]
         this.listLoading = false

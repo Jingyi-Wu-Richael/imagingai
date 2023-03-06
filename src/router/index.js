@@ -143,18 +143,31 @@ export const constantRoutes = [
       },
     ]
   },
-  // {
-  //   path: '/project',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       name: 'create project',
-  //       component: () => import('@/views/project/index'),
-  //       meta: { title: 'Create Project', icon: 'form' }
-  //     }
-  //   ]
-  // },
+  
+  {
+    path: '/model',
+    component: Layout,
+    redirect: '/model/train',
+    name: 'Train',
+    meta: {
+      title: 'Train model',
+      icon: 'el-icon-s-help'
+    },
+    children: [
+      // {
+      //   path: 'trainModel',
+      //   component: () => import('@/views/model/train'), // Parent router-view
+      //   name: 'trainModel',
+      //   meta: { title: 'My Model', icon: 'form' }
+      // },
+      {
+        path: 'trainModel2',
+        component: () => import('@/views/model/train'), // Parent router-view
+        name: 'trainModel',
+        meta: { title: 'Train Model', icon: 'form' }
+      }
+    ]
+  },
  
 
   {

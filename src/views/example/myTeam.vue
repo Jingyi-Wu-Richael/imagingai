@@ -136,7 +136,7 @@ export default {
 
       getTeams(formData).then(response => {
         if (isArray(response) && response.length < 1) {
-          this.$message({ type: 'warning', message: 'Team details bu' })
+          // this.$message({ type: 'warning', message: 'Team details bu' })
         }
         this.list = response
         console.log(response);

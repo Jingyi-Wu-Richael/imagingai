@@ -27,7 +27,7 @@
           {{ scope.row.projectID }}
         </template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="ifProcessed" width="110" align="center">
+      <el-table-column class-name="status-col" label="ifProcessed" width="" align="center">
         <template slot-scope="scope">
           <el-tag>{{scope.row.ifProcessed  }}</el-tag>
         </template>
@@ -62,7 +62,7 @@ export default {
       showDatabase({ projectName: this.search, token: this.user.token }).then(response => {
         console.log(response);
         if (isArray(response) && response.length < 1) {
-          this.$message({ type: 'warning', message: 'Team details bu' })
+          // this.$message({ type: 'warning', message: '' })
         }
         this.list = [...response]
         this.listLoading = false

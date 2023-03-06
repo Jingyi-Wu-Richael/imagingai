@@ -148,6 +148,13 @@ export function showDatabase(data) {
 }
 
 
+export function trainModel(data) {
+  return request({
+    url: "/train/model/",
+    method: 'post',
+    data
+  })
+}
 
 
 
