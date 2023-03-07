@@ -1,7 +1,9 @@
 <template>
   <div class="dashboard-container" v-loading="uploadFileLoading">
     <div class="processing">
-      <h3>Please Upload your MRI data (nii file) and push the "Start Processing" buttion to start data processing.</h3>
+      <h3>Please Upload your MRI data (nii file) and push the "Start Processing" buttion to start data processing. 
+        <br /> We have trained the Gibbs ResUnet with 180 epoches as our default model used here with mean dice loss: 0.6926.
+</h3>
       <div class="pro-box">
         <div class="right">
           <div class="group">

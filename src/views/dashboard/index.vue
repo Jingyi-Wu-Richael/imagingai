@@ -28,8 +28,8 @@
               </div>
               <div class="right">
                 <div>
-                  To do your segmentation, you may use the pretrained Gibbs Unet model we
-                  provided. Interested in learning more about Gibbs Unet? <a href="https://github.com/yanielc/Gibbs_ResUnet">Click this!</a>
+                  To do your segmentation, you may use the pretrained Gibbs ResUnet model we
+                  provided. Interested in learning more about Gibbs ResUnet? <a href="https://github.com/yanielc/Gibbs_ResUnet">Click this!</a>
                 </div>
               </div>
             </div>

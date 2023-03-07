@@ -1,6 +1,7 @@
 <template>
   <div class="app-container">
     <el-form ref="createTeam" :rules="rules" :model="form" label-width="120px" v-loading="loading">
+      <h3> We support users to customize their training but the training set here is rather small (three 3D medical data) to facilitate the process on CPU.</h3>
       <el-form-item prop="projectName" label="Project Name">
         <el-input v-model="form.projectName" />
       </el-form-item>
@@ -9,11 +10,11 @@
       </el-form-item>
       <el-form-item prop="alpha" label="Alpha">
         <el-input v-model="form.alpha"  @keyup.native="form.alpha = oninput(form.alpha,2)">
-          <template slot="append">alpha is the intensity of the applied Gibbs noise layer</template>
+          <template slot="append">Alpha is the intensity of the applied Gibbs noise layer. You can give an initialization, which should be 0-1.</template>
         </el-input>
       </el-form-item>
       <el-form-item>
-        <el-button disabled type="primary" @click="onSubmit">start training</el-button>
+        <el-button type="primary" @click="onSubmit">start training</el-button>
         <el-button @click="onCancel">Cancel</el-button>
       </el-form-item>
     </el-form>

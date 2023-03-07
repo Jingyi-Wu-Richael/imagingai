@@ -112,7 +112,7 @@
                                         rounded-2xl
                                         border-gray-300
                                         focus:outline-none focus:border-indigo-500
-                                    " type="" placeholder="Enter your password" />
+                                    " type="password" placeholder="Enter your password" />
               </div>
 
               <div>

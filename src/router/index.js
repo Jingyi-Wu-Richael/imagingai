@@ -68,7 +68,7 @@ export const constantRoutes = [
   {
     path: '/example',
     component: Layout,
-    redirect: '/example/table',
+    redirect: '/example/createTeam',
     name: 'Example',
     meta: { title: 'Team', icon: 'el-icon-s-help' },
     children: [
@@ -95,7 +95,7 @@ export const constantRoutes = [
   {
     path: '/project',
     component: Layout,
-    redirect: '/nested/menu1',
+    redirect: '/project/createProject',
     name: 'Nested',
     meta: {
       title: 'Project',
