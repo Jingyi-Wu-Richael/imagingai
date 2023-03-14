@@ -12,17 +12,17 @@
           {{ scope.row.id }}
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="teamName" label="teamName" width="200">
+      <el-table-column align="center" prop="teamName" label="Team Name" width="200">
         <template slot-scope="scope">
           <span>{{ scope.row.teamName }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="dataFileID" width="200">
+      <el-table-column label="Datafile ID" width="200">
         <template slot-scope="scope">
           {{ scope.row.dataFileID }}
         </template>
       </el-table-column>
-      <el-table-column label="projectID" width="110" align="center">
+      <el-table-column label="Project Name" width="150" align="center">
         <template slot-scope="scope">
           {{ scope.row.projectID }}
         </template>

@@ -6,17 +6,17 @@
           {{ scope.row.id }}
         </template>
       </el-table-column>
-      <el-table-column label="teamName" width="200">
+      <el-table-column label="Team Name" width="200">
         <template slot-scope="scope">
           {{ scope.row.teamName }}
         </template>
       </el-table-column>
-      <el-table-column label="owner" width="110" align="center">
+      <el-table-column label="Owner" width="110" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.owner }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="scale" width="110" align="center">
+      <el-table-column label="Scale" width="110" align="center">
         <template slot-scope="scope">
           {{ scope.row.scale }}
         </template>
@@ -26,12 +26,12 @@
           <el-tag>{{scope.row.isPublic  }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="Display_time">
+      <el-table-column align="center" prop="created_at" label="Description">
         <template slot-scope="scope">
           <span>{{ scope.row.description }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="Display_time">
+      <el-table-column align="center" prop="created_at" label="Display Time">
         <template slot-scope="scope">
           <i class="el-icon-time" />
           <span>{{ scope.row.createdTime }}</span>

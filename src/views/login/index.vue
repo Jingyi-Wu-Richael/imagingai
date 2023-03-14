@@ -181,7 +181,7 @@ export default {
       title: "Automatic Brain Tumour Segmentation deploying Gibbs ResUnet",
       //title_sub: "bullet point",
       strings: [
-        "<div>·manage your own project</div> <div>·work as a team</div> <div>·real time training your own model</div> <div>·real time testing using your chosen model</div> <div>·3d virtualise your MRI images</div>",
+        "<div>· Manage your own project</div> <div>· Work as a team</div> <div>· Real time training your own model</div> <div>· Real time testing using the default model</div> <div>· 3d visualise your MRI brain images</div>",
       ]
     }
   },

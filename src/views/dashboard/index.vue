@@ -13,7 +13,7 @@
               </div>
               <div class="right" style="width: 80%;">
                 <div>
-                  Seeing your NIfTI imagess in 3D is also simple! You can view the MRI brain
+                  Seeing your NIfTI imagess in 3D is simple! You can view the MRI brain
                   data and also the segmenting results clearly in 3D.
                 </div>
               </div>
@@ -73,8 +73,7 @@
               </div>
               <div class="right">
                 <div>
-                  Here is more... You can also train your own models and do your segmentation
-                  using your own models.
+                  Here is more... You can also train your own models and use tensorboard to visualise your train loss.
                 </div>
               </div>
             </div>

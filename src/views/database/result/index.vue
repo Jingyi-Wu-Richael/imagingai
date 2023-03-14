@@ -9,7 +9,7 @@
       <div class="pro-box">
         <div class="right">
           <div class="group">
-            <input v-model="processingForm.projectID" type="text" placeholder="Project ID">
+            <input v-model="processingForm.projectID" type="text" placeholder="Project Name">
           </div>
           <div class="group">
             <input v-model="processingForm.dataFileID" type="text" placeholder="DataFile ID">
